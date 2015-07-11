@@ -1,12 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-
+from .models import Student
 
 class StudentForm(forms.ModelForm):
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    username = forms.CharField()
-    email = forms.EmailField()
 
     class Meta:
         model = User
@@ -17,3 +13,12 @@ class StudentForm(forms.ModelForm):
         email = cleaned_data.get("email")
         if email and User.objects.filter(email=email).count():
             self.add_error('email', 'Email ID exists')
+
+
+class UserForm(forms.ModelForm):
+    book_count = forms.IntegerField(required=False)
+    last_visited = forms.DateTimeField(required=False)
+
+    class Meta:
+        model = Student
+        fields = ('mobile', 'book_count', 'last_visited')

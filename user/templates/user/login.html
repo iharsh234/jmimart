@@ -1,5 +1,12 @@
 {% extends 'user/base.html' %}
 
+{% block login %}
+    <a class="login" href="{% url 'user:login' %}">
+        <i class="user"></i>
+        <li class="user_desc">My Account</li>
+    </a>
+{% endblock %}
+
 {% block main_content %}
     <div class="contact">
         <div class="container">
@@ -17,14 +24,20 @@
 
                     <p>If you have an account with us, please log in.</p>
 
-                    <form>
+                    <form id="login_form" method="post" action="{% url 'user:login' %}">
+                        {% csrf_token %}
                         <div>
                             <span>Email Address<label>*</label></span>
-                            <input type="text">
+                            <input type="text" name="email" id="id_email">
+                            {% if login_form.username.errors %}
+                                {% for error in login_form.username.errors %}
+                                    <small class="error">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                         <div>
                             <span>Password<label>*</label></span>
-                            <input type="text">
+                            <input type="password" name="password" id="id_password">
                         </div>
                         <a class="forgot" href="#">Forgot Your Password?</a>
                         <input type="submit" value="Login">

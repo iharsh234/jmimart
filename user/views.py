@@ -85,6 +85,7 @@ def register(request):
 
     return render(request, 'user/register.html', context_dict)
 
+@login_required
 def profile(request):
     user = User.objects.get(username=request.user.username)
     student = Student.objects.get(user=user)
@@ -103,19 +104,11 @@ def profile(request):
             newsletter = False
         User.objects.filter(username=request.user.username).update(first_name=first_name, last_name=last_name)
         Student.objects.filter(user=user).update(mobile=mobile, newsletter=newsletter)
-        user = User.objects.get(username=request.user.username)
-        student = Student.objects.get(user=user)
-        # context_dict = {
-        #     'user': user,
-        #     'student': student,
-        #     'profile_updated': True
-        # }
-        # return render(request, 'user/profile.html', context_dict)
         return HttpResponseRedirect(reverse('user:profile'))
     else:
         return render(request, 'user/profile.html', context_dict)
 
-
+@login_required
 def new(request):
     from uuid import uuid4
 
@@ -137,6 +130,7 @@ def new(request):
         return HttpResponseRedirect(reverse('user:index'))
     return render(request, 'user/new.html', {})
 
+@login_required
 def edit(request, id):
     student = Student.objects.get(user=request.user)
     item = Item.objects.get(student=student, id=id)
@@ -146,6 +140,7 @@ def edit(request, id):
     }
     return render(request, 'user/edit.html', context_dict)
 
+@login_required
 def save(request):
     if request.method == 'POST':
         student = Student.objects.get(user=request.user)
@@ -164,7 +159,7 @@ def save(request):
                                                            description=description)
         return HttpResponseRedirect('/user/item/'+id)
 
-
+@login_required
 def view(request):
     student = Student.objects.get(user=request.user)
     items = Item.objects.filter(student=student).order_by('-timestamp')
@@ -173,6 +168,7 @@ def view(request):
     }
     return render(request, 'user/view.html', context_dict)
 
+@login_required
 def item(request, id):
     student = Student.objects.get(user=request.user)
     single_item = Item.objects.filter(student=student).get(id=id)
@@ -182,6 +178,12 @@ def item(request, id):
         'student': student,
     }
     return render(request, 'user/item.html', context_dict)
+
+@login_required
+def delete_item(request, id):
+    student = Student.objects.get(user=request.user)
+    Item.objects.filter(student=student, id=id).delete()
+    return HttpResponseRedirect(reverse('user:view'))
 
 @login_required
 def user_logout(request):

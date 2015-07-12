@@ -41,7 +41,8 @@
                     {% endif %}
                     <p>{{ item.description }}</p>
                     <br/>
-                    <a href="{% url 'user:edit' item.id %}" class="btn1 btn2 btn-primary1"><span>Edit</span></a>
+                    <a href="{% url 'user:edit' item.id %}" class="btn1 btn2 btn-primary1"><span>Edit</span></a>&nbsp;&nbsp;
+                    <a href="{% url 'user:delete' item.id %}" class="btn1 btn2 btn-primary1"><span>Delete</span></a>
                 </div>
                 <div class="clearfix"></div>
             </div>

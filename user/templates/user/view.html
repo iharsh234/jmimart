@@ -12,7 +12,7 @@
 {% block main_content %}
     <div class="container">
         <div class="text-center space-above">
-            {% if student.item_count == 0 %}
+            {% if not items %}
                 <p>No items to display</p>
             {% else %}
                 <div class="product_box1">

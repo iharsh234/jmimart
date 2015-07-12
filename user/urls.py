@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^new/$', views.new, name='new'),
     url(r'^item/(?P<id>[0-9]+)', views.item, name='item'),
     url(r'^edit/(?P<id>[0-9]+)', views.edit, name='edit'),
+    url(r'^delete/(?P<id>[0-9]+)', views.delete_item, name='delete'),
     url(r'^save/$', views.save, name='save'),
     url(r'^view/$', views.view, name='view'),
 )

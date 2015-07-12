@@ -16,7 +16,7 @@
         <p>Total items uploaded: {{ student.item_count }}</p>
         <div class="text-center space-above">
             <h4>Recently Uploaded Items</h4>
-            {% if student.item_count == 0 %}
+            {% if not items %}
                 <p>No items to display</p>
             {% else %}
                 <div class="product_box1">

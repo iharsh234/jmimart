@@ -9,32 +9,18 @@
 {% endblock %}
 
 
-<script>
-    $(document).ready(function(){
-        book_show = function() {
-            var type = document.getElementById('id_item_type');
-            if (type.options[type.selected].text == 'book') {
-                document.getElementById('book_inputs').style.visibility = 'visible';
-            } else {
-                document.getElementById('book_inputs').style.visibility = 'hidden';
-            }
-        }
-    });
-
-</script>
-
 {% block main_content %}
     <div class="contact">
         <div class="container">
             <div class="register">
-                <form id="student_form" method="post" action="{% url 'user:new' %}">
+                <form id="student_form" method="post" action="{% url 'user:new' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="register-top-grid">
                         <h3 class="text-center">ADD NEW ITEM</h3>
                         <br/>
                         <div>
                             <span>Item Type</span>
-                            <select name="item_type" id="id_item_type" onchange="book_show()">
+                            <select name="item_type" id="id_item_type">
                                 <option value="book">Books</option>
                                 <option value="stationary">Stationary</option>
                                 <option value="others">Others</option>
@@ -42,35 +28,38 @@
                         </div>
                         <div id="book_inputs">
                             <div>
-                                <span>Title</span>
+                                <span id="title_span">Title</span>
                                 <input type="text" name="title" id="id_title">
                             </div>
-                            <div>
+                            <div id="price_block">
+                                <span>Price</span>
+                                <input type="text" name="price" id="id_price">
+                            </div>
+                            <div id="author_block">
                                 <span>Author</span>
                                 <input type="text" name="author" id="id_author">
                             </div>
-                            <div>
+                            <div id="publisher_block">
                                 <span>Publisher</span>
                                 <input type="text" name="publisher" id="id_publisher">
                             </div>
                         </div>
 
                         <div>
-                            <span>Username</span>
-                            <input type="text" name="username" id="id_username" value="{{ user.username }}" disabled><br/>
+                            <span>Description</span>
+                            <textarea name="description" id="is_description" cols="30" rows="10"></textarea>
                         </div>
                         <div>
-                            <span>Mobile</span>
-                            <input type="text" name="mobile" id="id_mobile" value="{{ student.mobile }}">
+                            <span>Upload Image</span>
+                            <input type="file" name="image" id="id_image">
                         </div>
                         <div class="clearfix"></div>
-                        <a class="news-letter" href="#">
-                            <label class="checkbox"><input type="checkbox" name="newsletter" id="id_newsletter" {% if student.newsletter %}checked="checked"{% endif %}><i> </i>Sign Up
-                                for Newsletter</label>
+                        <a class="news-letter" href="#" style="visibility: hidden;">
+                            <label class="checkbox"><input type="checkbox"></label>
                         </a>
                     </div>
                     <div class="register-but">
-                        <input type="submit" value="save" name="submit">
+                        <input type="submit" value="add new item" name="submit">
                         <div class="clearfix"></div>
                     </div>
                 </form>
@@ -78,4 +67,25 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function(){
+            function book_show() {
+                var type = document.getElementById('id_item_type');
+                if (type.options[type.selectedIndex].value == 'book') {
+                    document.getElementById('title_span').textContent = 'TITLE';
+                    $('#publisher_block').show();
+                    $('#author_block').show();
+                } else {
+                    document.getElementById('title_span').textContent = 'NAME';
+                    $('#publisher_block').hide();
+                    $('#author_block').hide();
+                }
+            }
+
+            $('#id_item_type').on('change', book_show);
+        });
+    </script>
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import StudentForm, UserForm
-from .models import User, Student
+from .models import User, Student, Item
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
@@ -85,9 +85,11 @@ def register(request):
 def profile(request):
     user = User.objects.get(username=request.user.username)
     student = Student.objects.get(user=user)
+    items = Item.objects.filter(student=student).order_by('timestamp').get()[:5]
     context_dict = {
         'user': user,
         'student': student,
+        'items': items,
     }
 
     if request.method == 'POST':
@@ -114,6 +116,24 @@ def profile(request):
 
 
 def new(request):
+    from uuid import uuid4
+
+    if request.method == 'POST':
+        student = Student.objects.get(user=request.user)
+        image = request.FILES.get('image')
+        item_type = request.POST.get('item_type')
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        publisher = request.POST.get('publisher')
+        price = request.POST.get('price')
+        description = request.POST.get('description')
+        image.name = '{}{}'.format(uuid4().hex,image.name)
+        item = Item(title=title, author=author, publisher=publisher, price=price, description=description,
+                    image=image, item_type=item_type, student=student)
+        item.save()
+        student.item_count += 1
+        student.save()
+        return HttpResponseRedirect(reverse('user:index'))
     return render(request, 'user/new.html', {})
 
 @login_required

@@ -12,64 +12,86 @@
     </div> -->
     <div class="content_bottom">
         <div class="container">
+            <h4 class="text-center">Latest Books</h4>
             <ul class="grid1">
-                <li>
-                    <div class="view view-first">
-                        <img src="images/b1.jpg" class="img-responsive" alt=""/>
+                {% for book in books %}
+                    <li>
+                        <div class="view view-first spaced">
+                            <img src="/{{ book.thumbnail }}" class="img-responsive centered" alt=""/>
 
-                        <div class="tab_desc">
-                            <h3><a href="#">Feel Tank</a></h3>
+                            <div class="tab_desc">
+                                <h3>{{ book.title }}</h3>
 
-                            <p>$59.95</p>
-                            <a href="#" class="btn1 btn-primary1"><span>Add To Cart</span><img src="images/plus.png"
-                                                                                               alt=""/></a>
+                                <p>₹ {{ book.price }}</p>
+                                <a href="{% url 'show:item' book.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="view view-first">
-                        <img src="images/b2.jpg" class="img-responsive" alt=""/>
-
-                        <div class="tab_desc">
-                            <h3><a href="#">Feel Tank</a></h3>
-
-                            <p>$59.95</p>
-                            <a href="#" class="btn1 btn-primary1"><span>Add To Cart</span><img src="images/plus.png"
-                                                                                               alt=""/></a>
-                        </div>
-                    </div>
-                    <div class="sale-box1"></div>
-                </li>
-                <li>
-                    <div class="view view-first">
-                        <img src="images/b3.jpg" class="img-responsive" alt=""/>
-
-                        <div class="tab_desc">
-                            <h3><a href="#">Feel Tank</a></h3>
-
-                            <p>$59.95</p>
-                            <a href="#" class="btn1 btn-primary1"><span>Add To Cart</span><img src="images/plus.png"
-                                                                                               alt=""/></a>
-                        </div>
-                    </div>
-                </li>
-                <li class="grid1_last">
-                    <div class="view view-first">
-                        <img src="images/b4.jpg" class="img-responsive" alt=""/>
-
-                        <div class="tab_desc">
-                            <h3><a href="#">Feel Tank</a></h3>
-
-                            <p>$59.95</p>
-                            <a href="#" class="btn1 btn-primary1"><span>Add To Cart</span><img src="images/plus.png"
-                                                                                               alt=""/></a>
-                        </div>
-                    </div>
-                    <div class="sale-box1"></div>
-                </li>
+    {#                    <div class="sale-box1"></div>#}
+                    </li>
+                {% endfor %}
                 <div class="clearfix"></div>
             </ul>
+            {% if stationary %}
+            <h4 class="text-center">Latest Stationary Items</h4>
+            <ul class="grid1">
+                {% for st in stationary %}
+                    <li>
+                        <div class="view view-first spaced">
+                            <img src="/{{ st.thumbnail }}" class="img-responsive centered" alt=""/>
 
+                            <div class="tab_desc">
+                                <h3>{{ st.title }}</h3>
+
+                                <p>₹ {{ st.price }}</p>
+                                <a href="{% url 'show:item' st.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                            </div>
+                        </div>
+    {#                    <div class="sale-box1"></div>#}
+                    </li>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </ul>
+            {% endif %}
+            {% if others %}
+            <h4 class="text-center">Latest Other Items</h4>
+            <ul class="grid1">
+                {% for other in others %}
+                    <li>
+                        <div class="view view-first spaced">
+                            <img src="/{{ other.thumbnail }}" class="img-responsive centered" alt=""/>
+
+                            <div class="tab_desc">
+                                <h3>{{ other.title }}</h3>
+
+                                <p>₹ {{ other.price }}</p>
+                                <a href="{% url 'show:item' other.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                            </div>
+                        </div>
+    {#                    <div class="sale-box1"></div>#}
+                    </li>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block about %}
+    <div class="grid-1">
+        <div class="container">
+            <h1>About JMImart</h1>
+
+            <p>Welcome to JMImart!</p>
+            <p>The purpose of this website is to enable students to sell stuff they might no longer
+                require. There are various old books and stationary items such as drafters that become
+                useless as we proceed with our education. Instead of discarding them, such things can be
+                sold to junior students.
+            </p>
+            <p>This website has been made by Zishan Ahmad, BTech Computer Engg., 4th year.
+                Feel free to contact me if you want any added features in the website or if you
+                encounter some errors.
+            </p>
         </div>
     </div>
 {% endblock %}

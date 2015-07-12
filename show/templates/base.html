@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-    <title>Lookshop Bootstarp Website Template | Home :: w3layouts</title>
+    <title>Welcome | JMImart</title>
     <link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css'/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Custom Theme files -->
@@ -16,7 +16,7 @@
         window.scrollTo(0, 1);
     } </script>
     <!--webfont-->
-    <link href='http://fonts.googleapis.com/css?family=Oxygen:300,400,700' rel='stylesheet' type='text/css'>
+{#    <link href='http://fonts.googleapis.com/css?family=Oxygen:300,400,700' rel='stylesheet' type='text/css'>#}
     <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
     <script src="{% static 'js/jquery.easydropdown.js' %}"></script>
     <script src="{% static 'js/responsiveslides.min.js' %}"></script>
@@ -47,7 +47,7 @@
     <div class="header_top">
         <div class="container">
             <div class="header_top_left">
-                <p>customer care : 9899414803</p>
+                <p>customer care : zishanrbp@gmail.com</p>
             </div>
             <div class="header_top_right">
                 <ul class="header_user_info">
@@ -59,19 +59,19 @@
                     <div class="clearfix"></div>
                 </ul>
                 <!-- start search-->
-                <div class="search-box">
-                    <div id="sb-search" class="sb-search">
-                        <form>
-                            <input class="sb-search-input" placeholder="Enter your search term..." type="search"
-                                   name="search" id="search">
-                            <input class="sb-search-submit" type="submit" value="">
-                            <span class="sb-icon-search"> </span>
-                        </form>
-                    </div>
-                </div>
+{#                <div class="search-box">#}
+{#                    <div id="sb-search" class="sb-search">#}
+{#                        <form>#}
+{#                            <input class="sb-search-input" placeholder="Enter your search term..." type="search"#}
+{#                                   name="search" id="search">#}
+{#                            <input class="sb-search-submit" type="submit" value="">#}
+{#                            <span class="sb-icon-search"> </span>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
                 <!----search-scripts---->
-                <script src="js/classie.js"></script>
-                <script src="js/uisearch.js"></script>
+                <script src="{% static 'js/classie.js' %}"></script>
+                <script src="{% static 'js/uisearch.js' %}"></script>
                 <script>
                     new UISearch(document.getElementById('sb-search'));
                 </script>
@@ -84,34 +84,18 @@
     <div class="header_bottom">
         <div class="container">
             <div class="logo">
-                <a href="index.html"><img src="{% static 'images/logo.png' %}" alt=""/></a>
+                <a href="{% url 'show:index' %}"><img src="{% static 'images/logo.png' %}" alt=""/></a>
             </div>
             <div class="header_bottom_right">
                 <div class="h_menu4"><!-- start h_menu4 -->
                     <a class="toggleMenu" href="#">Menu</a>
                     <ul class="nav">
-                        <li class="active"><a href="index.html">New</a></li>
-                        <li><a href="products.html">Designers</a></li>
-                        <li><a href="products.html">Women</a>
-                            <ul>
-                                <li><a href="products.html">Accessories</a></li>
-                                <li><a href="products.html">Ethnic Apparel</a></li>
-                                <li><a href="products.html">Footwear</a></li>
-                                <li><a href="products.html">Grooming</a></li>
-                                <li><a href="products.html">Handbags</a></li>
-                                <li><a href="products.html">Jewellery</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="products.html">Men</a>
-                            <ul>
-                                <li><a href="products.html">Accessories</a></li>
-                                <li><a href="products.html">Footwear</a></li>
-                                <li><a href="products.html">Apparel</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="products.html">Clearence</a></li>
+                        <li class="active"><a href="{% url 'show:index' %}">HOME</a></li>
+                        <li><a href="{% url 'show:books' %}">BOOKS</a></li>
+                        <li><a href="{% url 'show:stationary' %}">STATIONARY</a></li>
+                        <li><a href="{% url 'show:others' %}">OTHERS</a></li>
                     </ul>
-                    <script type="text/javascript" src="js/nav.js"></script>
+                    <script type="text/javascript" src="{% static 'js/nav.js' %}"></script>
                 </div>
                 <!-- end h_menu4 -->
                 <div class="clearfix"></div>
@@ -122,18 +106,8 @@
 
 {% block main_content %}{% endblock %}
 
-<div class="grid-1">
-    <div class="container">
-        <h1>About JMImart</h1>
+{% block about %}{% endblock %}
 
-        <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes
-            demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui
-            sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum
-            claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo
-            typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.Ut wisi enim ad minim veniam, quis
-            nostrud exerci tation ullamcorper suscipit lobortis</p>
-    </div>
-</div>
 <div class="footer_top">
     <div class="container">
         <div class="col-sm-2 grid-3">

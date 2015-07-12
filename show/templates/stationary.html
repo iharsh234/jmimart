@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <div class="content_bottom">
+        <div class="container">
+            <ul class="grid1">
+                {% for st in stationary %}
+                    <li>
+                        <div class="view view-first spaced">
+                            <img src="/{{ st.thumbnail }}" class="img-responsive centered" alt=""/>
+
+                            <div class="tab_desc">
+                                <h3>{{ st.title }}</h3>
+
+                                <p>₹ {{ st.price }}</p>
+                                <a href="{% url 'show:item' st.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                            </div>
+                        </div>
+    {#                    <div class="sale-box1"></div>#}
+                    </li>
+                {% empty %}
+                    <p class="text-center">No items to show</p><br/><br/>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

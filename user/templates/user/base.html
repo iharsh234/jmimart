@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-    <title>Lookshop Bootstarp Website Template | Home :: w3layouts</title>
+    <title>{% block title %}{% endblock %}</title>
     <link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css'/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Custom Theme files -->
@@ -67,8 +67,8 @@
                     </div>
                 </div>
                 <!----search-scripts---->
-                <script src="js/classie.js"></script>
-                <script src="js/uisearch.js"></script>
+                <script src="{% static 'js/classie.js' %}"></script>
+                <script src="{% static 'js/uisearch.js' %}"></script>
                 <script>
                     new UISearch(document.getElementById('sb-search'));
                 </script>
@@ -83,36 +83,23 @@
             <div class="logo">
                 <a href="index.html"><img src="{% static 'images/logo.png' %}" alt=""/></a>
             </div>
-            <div class="header_bottom_right">
-                <div class="h_menu4"><!-- start h_menu4 -->
-                    <a class="toggleMenu" href="#">Menu</a>
-                    <ul class="nav">
-                        <li class="active"><a href="index.html">New</a></li>
-                        <li><a href="products.html">Designers</a></li>
-                        <li><a href="products.html">Women</a>
-                            <ul>
-                                <li><a href="products.html">Accessories</a></li>
-                                <li><a href="products.html">Ethnic Apparel</a></li>
-                                <li><a href="products.html">Footwear</a></li>
-                                <li><a href="products.html">Grooming</a></li>
-                                <li><a href="products.html">Handbags</a></li>
-                                <li><a href="products.html">Jewellery</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="products.html">Men</a>
-                            <ul>
-                                <li><a href="products.html">Accessories</a></li>
-                                <li><a href="products.html">Footwear</a></li>
-                                <li><a href="products.html">Apparel</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="products.html">Clearence</a></li>
-                    </ul>
-                    <script type="text/javascript" src="js/nav.js"></script>
+            {% if user.username %}
+            {% block navigation %}
+                <div class="header_bottom_right">
+                    <div class="h_menu4"><!-- start h_menu4 -->
+                        <a class="toggleMenu" href="#">Menu</a>
+                        <ul class="nav">
+                            <li class="active"><a href="{% url 'user:new' %}">New Item</a></li>
+                            <li><a href="#">View Items</a></li>
+                            <li><a href="{% url 'user:profile' %}">Profile</a></li>
+                        </ul>
+                        <script type="text/javascript" src="js/nav.js"></script>
+                    </div>
+                    <!-- end h_menu4 -->
+                    <div class="clearfix"></div>
                 </div>
-                <!-- end h_menu4 -->
-                <div class="clearfix"></div>
-            </div>
+            {% endblock %}
+            {% endif %}
         </div>
     </div>
 </div>

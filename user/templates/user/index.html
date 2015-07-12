@@ -1,4 +1,5 @@
 {% extends 'user/base.html' %}
+{% block title %}{{ user.first_name }} {{ user.last_name }} | JMImart{% endblock %}
 
 {% block login %}
     <a class="login" href="{% url 'user:logout' %}">
@@ -9,5 +10,16 @@
 
 
 {% block main_content %}
+    <div class="container">
+        <h2>Welcome {{ user.first_name }}</h2>
 
+        <p>You have uploaded: {{ student.item_count }} items</p>
+        <p>Your recent items are:</p>
+        {% if student.item_count == 0 %}
+            <p>No items to display</p>
+        {% else %}
+            <p>items</p>
+        {% endif %}
+        <br/>
+    </div>
 {% endblock %}

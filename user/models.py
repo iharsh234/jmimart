@@ -7,7 +7,7 @@ class Student(models.Model):
     user = models.OneToOneField(User)
     mobile = models.BigIntegerField()
     newsletter = models.BooleanField(default=0)
-    book_count = models.IntegerField(default=0)
+    item_count = models.IntegerField(default=0)
     last_visited = models.DateTimeField(default=datetime.now)
 
     def __str__(self):

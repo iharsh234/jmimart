@@ -1,0 +1,58 @@
+{% extends 'user/base.html' %}
+{% block title %}Profile - {{ user.first_name }} {{ user.last_name }} | JMImart{% endblock %}
+
+{% block login %}
+    <a class="login" href="{% url 'user:logout' %}">
+        <i class="user"></i>
+        <li class="user_desc">Logout</li>
+    </a>
+{% endblock %}
+
+{% block main_content %}
+    <div class="contact">
+        <div class="container">
+            {% if profile_updated %}
+                <p class="bg-success text-center spaced">Profile Updated!</p>
+            {% endif %}
+            <div class="register">
+                <form id="student_form" method="post" action="{% url 'user:profile' %}">
+                    {% csrf_token %}
+                    <div class="register-top-grid">
+                        <h3>PERSONAL INFORMATION</h3>
+
+                        <div>
+                            <span>First Name</span>
+                            <input type="text" name="first_name" id="id_first_name" value="{{ user.first_name }}">
+                        </div>
+                        <div>
+                            <span>Last Name</span>
+                            <input type="text" name="last_name" id="id_last_name" value="{{ user.last_name }}">
+                        </div>
+                        <div>
+                            <span>Email Address</span>
+                            <input type="text" name="email" id="id_email" value="{{ user.email }}" disabled>
+                        </div>
+                        <div>
+                            <span>Username</span>
+                            <input type="text" name="username" id="id_username" value="{{ user.username }}" disabled><br/>
+                        </div>
+                        <div>
+                            <span>Mobile</span>
+                            <input type="text" name="mobile" id="id_mobile" value="{{ student.mobile }}">
+                        </div>
+                        <div class="clearfix"></div>
+                        <a class="news-letter" href="#">
+                            <label class="checkbox"><input type="checkbox" name="newsletter" id="id_newsletter" {% if student.newsletter %}checked="checked"{% endif %}><i> </i>Sign Up
+                                for Newsletter</label>
+                        </a>
+                    </div>
+                    <div class="register-but">
+                        <input type="submit" value="save" name="submit">
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

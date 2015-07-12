@@ -41,6 +41,7 @@
             });
         });
     </script>
+    {% block links %}{% endblock %}
 </head>
 <body>
 <div class="header">
@@ -91,7 +92,7 @@
                         <ul class="nav">
                             <li><a href="{% url 'user:index' %}">Dashboard</a></li>
                             <li class="active"><a href="{% url 'user:new' %}">New Item</a></li>
-                            <li><a href="#">View Items</a></li>
+                            <li><a href="{% url 'user:view' %}">View Items</a></li>
                             <li><a href="{% url 'user:profile' %}">Profile</a></li>
                         </ul>
                         <script type="text/javascript" src="js/nav.js"></script>

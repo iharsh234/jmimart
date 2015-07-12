@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
 from django.core.urlresolvers import reverse
+from django.utils.html import escape
 
 # Create your views here.
 
@@ -12,9 +13,11 @@ from django.core.urlresolvers import reverse
 def index(request):
     user = request.user
     student = Student.objects.filter(user=user).get()
+    items = Item.objects.filter(student=student).order_by('-timestamp')[:3]
     context_dict = {
         'user': user,
         'student': student,
+        'items': items,
     }
     return render(request, 'user/index.html', context_dict)
 
@@ -22,12 +25,12 @@ def user_login(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/user')
     if request.method == 'POST':
-        email = request.POST.get('email')
+        email = escape(request.POST.get('email').strip())
         user = User.objects.filter(email=email)
         if user:
             user = user.get()
             username = user.username
-            password = request.POST.get('password')
+            password = escape(request.POST.get('password').strip())
             user = authenticate(username=username, password=password)
             if user:
                 if user.is_active:
@@ -85,17 +88,15 @@ def register(request):
 def profile(request):
     user = User.objects.get(username=request.user.username)
     student = Student.objects.get(user=user)
-    items = Item.objects.filter(student=student).order_by('timestamp').get()[:5]
     context_dict = {
         'user': user,
         'student': student,
-        'items': items,
     }
 
     if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        mobile = request.POST.get('mobile')
+        first_name = escape(request.POST.get('first_name').strip())
+        last_name = escape(request.POST.get('last_name').strip())
+        mobile = escape(request.POST.get('mobile').strip())
         if request.POST.get('newsletter') == 'on':
             newsletter = True
         else:
@@ -121,13 +122,13 @@ def new(request):
     if request.method == 'POST':
         student = Student.objects.get(user=request.user)
         image = request.FILES.get('image')
-        item_type = request.POST.get('item_type')
-        title = request.POST.get('title')
-        author = request.POST.get('author')
-        publisher = request.POST.get('publisher')
-        price = request.POST.get('price')
-        description = request.POST.get('description')
-        image.name = '{}{}'.format(uuid4().hex,image.name)
+        item_type = escape(request.POST.get('item_type'))
+        title = escape(request.POST.get('title').strip())
+        author = escape(request.POST.get('author').strip())
+        publisher = escape(request.POST.get('publisher').strip())
+        price = escape(request.POST.get('price').strip())
+        description = escape(request.POST.get('description').strip())
+        image.name = '{}{}'.format(uuid4().hex, image.name[image.name.rfind('.'):])
         item = Item(title=title, author=author, publisher=publisher, price=price, description=description,
                     image=image, item_type=item_type, student=student)
         item.save()
@@ -135,6 +136,52 @@ def new(request):
         student.save()
         return HttpResponseRedirect(reverse('user:index'))
     return render(request, 'user/new.html', {})
+
+def edit(request, id):
+    student = Student.objects.get(user=request.user)
+    item = Item.objects.get(student=student, id=id)
+    context_dict = {
+        'student': student,
+        'item': item,
+    }
+    return render(request, 'user/edit.html', context_dict)
+
+def save(request):
+    if request.method == 'POST':
+        student = Student.objects.get(user=request.user)
+        item_type = request.POST.get('item_type')
+        title = escape(request.POST.get('title').strip())
+        author = escape(request.POST.get('author').strip())
+        publisher = escape(request.POST.get('publisher').strip())
+        price = escape(request.POST.get('price').strip())
+        description = escape(request.POST.get('description').strip())
+        id = request.POST.get('id')
+        Item.objects.filter(student=student, id=id).update(item_type=item_type,
+                                                           title=title,
+                                                           author=author,
+                                                           publisher=publisher,
+                                                           price=price,
+                                                           description=description)
+        return HttpResponseRedirect('/user/item/'+id)
+
+
+def view(request):
+    student = Student.objects.get(user=request.user)
+    items = Item.objects.filter(student=student).order_by('-timestamp')
+    context_dict = {
+        'items': items,
+    }
+    return render(request, 'user/view.html', context_dict)
+
+def item(request, id):
+    student = Student.objects.get(user=request.user)
+    single_item = Item.objects.filter(student=student).get(id=id)
+    context_dict = {
+        'id': id,
+        'item': single_item,
+        'student': student,
+    }
+    return render(request, 'user/item.html', context_dict)
 
 @login_required
 def user_logout(request):

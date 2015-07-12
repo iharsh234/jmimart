@@ -20,7 +20,7 @@ class Item(models.Model):
     title = models.CharField(max_length=150)
     author = models.CharField(max_length=100, null=True, blank=True)
     publisher = models.CharField(max_length=100, null=True, blank=True)
-    price = models.DecimalField(default=0, max_digits=5, decimal_places=2)
+    price = models.DecimalField(default=0, max_digits=6, decimal_places=2)
     item_type = models.CharField(max_length=15)
     image = models.ImageField(upload_to='static/images', default='no-image.png')
     thumbnail = models.ImageField(upload_to='static/images', blank=True, null=True)
@@ -38,7 +38,8 @@ class Item(models.Model):
         from django.core.files.uploadhandler import BytesIO
         from django.core.files.uploadedfile import SimpleUploadedFile
 
-        THUMBNAIL_SIZE = (200, 200)
+        THUMBNAIL_SIZE = (150, 195)
+        FULL_SIZE = (760, 950)
 
         DJANGO_TYPE = self.image.file.content_type
 
@@ -58,6 +59,16 @@ class Item(models.Model):
         r = BytesIO(self.image.read())
         fullsize_image = Image.open(r)
         new_image = fullsize_image.copy()
+
+        fullsize_image.thumbnail(FULL_SIZE, Image.ANTIALIAS)
+
+        temp_handle = BytesIO()
+        fullsize_image.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile(os.path.split(self.image.name)[-1], temp_handle.read(), content_type=DJANGO_TYPE)
+
+        self.image.save('{}.{}'.format(os.path.splitext(suf.name)[0], FILE_EXTENSION), suf, save=False)
 
         new_image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
 

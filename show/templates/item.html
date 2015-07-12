@@ -1,0 +1,58 @@
+{% extends 'user/base.html' %}
+{% block title %}Item | JMImart{% endblock %}
+
+{% block login %}
+    <a class="login" href="{% url 'user:logout' %}">
+        <i class="user"></i>
+        <li class="user_desc">Logout</li>
+    </a>
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="single_top">
+        <div class="container">
+            <div class="single_grid">
+                <div class="grid images_3_of_2">
+                    <ul id="etalage">
+                        <li>
+                            <a href="optionallink.html">
+                                <img class="etalage_thumb_image" src="/{{ item.thumbnail }}" class="img-responsive"/>
+{#                                <img class="etalage_source_image" src="/{{ item.image }}" class="img-responsive" title=""/>#}
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="desc1 span_3_of_2">
+                    <ul class="back">
+                        <li><i class="back_arrow"> </i>Back to <a href="{% url 'user:view' %}">View Items</a></li>
+                    </ul>
+                    <h1>{{ item.title }}</h1>
+                    <ul class="price_single">
+                        <li class="head"><h2>₹ {{ item.price }}</h2></li>
+{#                        <li class="head_desc"><a href="#">12 reviews</a><img src="images/review.png" alt=""/></li>#}
+                        <div class="clearfix"></div>
+                    </ul>
+                    {% if item.author %}
+                        <h3>Author: {{ item.author }}</h3>
+                    {% endif %}
+                    {% if item.publisher %}
+                        <h3>Publisher: {{ item.publisher }}</h3>
+                    {% endif %}
+                    <p>{{ item.description }}</p>
+
+                    <div class="dropdown_top">
+                        <h2>Contact Details</h2>
+                        <h4>Name: {{ student.user.first_name }} {{ student.user.last_name }}</h4>
+                        <h4>Mobile: {{ student.mobile }}</h4>
+                        <div class="clearfix"></div>
+                    </div>
+                    <a href="#" class="btn1 btn2 btn-primary1"><span>Add To Cart</span><img src="images/plus.png"
+                                                                                            alt=""></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

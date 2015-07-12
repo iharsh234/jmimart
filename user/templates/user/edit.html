@@ -1,0 +1,89 @@
+{% extends 'user/base.html' %}
+{% block title %}Edit Item | JMImart{% endblock %}
+
+{% block login %}
+    <a class="login" href="{% url 'user:logout' %}">
+        <i class="user"></i>
+        <li class="user_desc">Logout</li>
+    </a>
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="contact">
+        <div class="container">
+            <div class="register">
+                <form id="student_form" method="post" action="{% url 'user:save' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="register-top-grid">
+                        <h3 class="text-center">EDIT ITEM</h3>
+                        <br/>
+                        <div>
+                            <span>Item Type*</span>
+                            <select name="item_type" id="id_item_type">
+                                <option value="book" {% if item.item_type == 'book' %}selected{% endif %}>Books</option>
+                                <option value="stationary" {% if item.item_type == 'stationary' %}selected{% endif %}>Stationary</option>
+                                <option value="others" {% if item.item_type == 'others' %}selected{% endif %}>Others</option>
+                            </select>
+                        </div>
+                        <div id="book_inputs">
+                            <div>
+                                <span id="title_span">Title*</span>
+                                <input type="text" name="title" id="id_title" value="{{ item.title }}">
+                            </div>
+                            <div id="price_block">
+                                <span>Price*</span>
+                                <input type="text" name="price" id="id_price" value="{{ item.price }}">
+                            </div>
+                            <div id="author_block">
+                                <span>Author</span>
+                                <input type="text" name="author" id="id_author" value="{{ item.author }}">
+                            </div>
+                            <div id="publisher_block">
+                                <span>Publisher</span>
+                                <input type="text" name="publisher" id="id_publisher" value="{{ item.publisher }}">
+                            </div>
+                        </div>
+
+                        <div>
+                            <span>Description</span>
+                            <textarea name="description" id="is_description" cols="30" rows="10">{{ item.description }}</textarea>
+                        </div>
+                        <input type="hidden" name="id" value="{{ item.id }}" />
+                        <div class="clearfix"></div>
+                        <a class="news-letter" href="#" style="visibility: hidden;">
+                            <label class="checkbox"><input type="checkbox"></label>
+                        </a>
+                    </div>
+                    <div class="register-but">
+                        <input type="submit" value="Update" name="submit">
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function(){
+            function book_show() {
+                var type = document.getElementById('id_item_type');
+                if (type.options[type.selectedIndex].value == 'book') {
+                    document.getElementById('title_span').textContent = 'TITLE';
+                    $('#publisher_block').show();
+                    $('#author_block').show();
+                } else {
+                    document.getElementById('title_span').textContent = 'NAME';
+                    $('#publisher_block').hide();
+                    $('#author_block').hide();
+                }
+            }
+
+            $('#id_item_type').on('change', book_show);
+            $(window).on('load', book_show);
+        });
+    </script>
+{% endblock %}

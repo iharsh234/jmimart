@@ -8,4 +8,8 @@ urlpatterns = patterns('',
     url(r'^register/$', views.register, name='register'),
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^new/$', views.new, name='new'),
+    url(r'^item/(?P<id>[0-9]+)', views.item, name='item'),
+    url(r'^edit/(?P<id>[0-9]+)', views.edit, name='edit'),
+    url(r'^save/$', views.save, name='save'),
+    url(r'^view/$', views.view, name='view'),
 )

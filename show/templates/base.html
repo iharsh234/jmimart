@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-    <title>Welcome | JMImart</title>
+    <title>{% block title %}{% endblock %} | JMImart</title>
     <link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css'/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Custom Theme files -->

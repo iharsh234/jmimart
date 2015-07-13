@@ -8,7 +8,6 @@
     </a>
 {% endblock %}
 
-
 {% block main_content %}
     <div class="container">
         <h2>Welcome {{ user.first_name }}</h2>
@@ -24,7 +23,7 @@
                         {% for item in items %}
                             <li>
                                 <div class="view">
-                                    <img src="/{{ item.thumbnail }}" class="img-responsive centered big" alt=""/>
+                                    <img src="/media/{{ item.thumbnail }}" class="img-responsive centered big" alt=""/>
                                     <div class="product_mask"></div>
                                     <div class="tab_desc1">
                                         <h3>{{ item.title }}</h3>

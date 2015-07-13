@@ -1,1 +1,0 @@
-web: gunicorn jmimart.wsgi --log-file -

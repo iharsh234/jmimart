@@ -62,16 +62,16 @@
                     <div class="clearfix"></div>
                 </ul>
                 <!-- start search-->
-                <div class="search-box">
-                    <div id="sb-search" class="sb-search">
-                        <form>
-                            <input class="sb-search-input" placeholder="Enter your search term..." type="search"
-                                   name="search" id="search">
-                            <input class="sb-search-submit" type="submit" value="">
-                            <span class="sb-icon-search"> </span>
-                        </form>
-                    </div>
-                </div>
+{#                <div class="search-box">#}
+{#                    <div id="sb-search" class="sb-search">#}
+{#                        <form>#}
+{#                            <input class="sb-search-input" placeholder="Enter your search term..." type="search"#}
+{#                                   name="search" id="search">#}
+{#                            <input class="sb-search-submit" type="submit" value="">#}
+{#                            <span class="sb-icon-search"> </span>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
                 <!----search-scripts---->
                 <script src="{% static 'js/classie.js' %}"></script>
                 <script src="{% static 'js/uisearch.js' %}"></script>
@@ -113,58 +113,43 @@
 
 {% block main_content %}{% endblock %}
 
+
 <div class="footer_top">
     <div class="container">
         <div class="col-sm-2 grid-3">
             <h3>Customer Service</h3>
             <ul class="footer_list">
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Terms of payment</a></li>
-                <li><a href="#">Terms of sale</a></li>
-                <li><a href="#">Terms and conditions</a></li>
-                <li><a href="#">Returns and Refunds</a></li>
+                <li><a href="{% url 'show:contact' %}">Contact</a></li>
+                <li><a href="{% url 'show:tnc' %}">Terms and conditions</a></li>
             </ul>
         </div>
         <div class="col-sm-2 grid-3">
             <h3>Information</h3>
             <ul class="footer_list">
-                <li><a href="#">Affiliate</a></li>
-                <li><a href="#">Cookies</a></li>
-                <li><a href="#">How to Shop</a></li>
-                <li><a href="#">About Nelly</a></li>
-                <li><a href="#">Investor relations</a></li>
+                <li><a href="#">How to post items</a></li>
             </ul>
         </div>
         <div class="col-sm-2 grid-3">
             <h3>Campaigns</h3>
             <ul class="footer_list">
-                <li><a href="#">Evening Dresses</a></li>
-                <li><a href="#">Makeup</a></li>
-                <li><a href="#">Fashion forward</a></li>
-                <li><a href="#">Training clothes</a></li>
-                <li><a href="#">Special Occasion Dresses</a></li>
+                <li><a href="#">Student Ambassador</a></li>
             </ul>
         </div>
         <div class="col-sm-2 grid-3">
-            <h3>Stores</h3>
-            <ul class="footer_list">
-                <li><a href="#">Paris</a></li>
-                <li><a href="#">New York</a></li>
-                <li><a href="#">London</a></li>
-                <li><a href="#">Madrid</a></li>
-                <li><a href="#">Tokio</a></li>
-            </ul>
+{#            <h3>Stores</h3>#}
+{#            <ul class="footer_list">#}
+{#                <li><a href="#">Paris</a></li>#}
+{#                <li><a href="#">New York</a></li>#}
+{#                <li><a href="#">London</a></li>#}
+{#                <li><a href="#">Madrid</a></li>#}
+{#                <li><a href="#">Tokio</a></li>#}
+{#            </ul>#}
         </div>
         <div class="col-sm-2 grid-3">
             <h3>Social</h3>
             <ul class="footer_social">
-                <li><a href="#"> <i class="tw1"> </i> </a></li>
-                <li><a href="#"> <i class="db1"> </i> </a></li>
                 <li><a href="#"> <i class="fb1"> </i></a></li>
                 <li><a href="#"> <i class="g1"> </i></a></li>
-                <li><a href="#"> <i class="thumb"> </i></a></li>
-                <li><a href="#"> <i class="vimeo"> </i></a></li>
             </ul>
         </div>
         <div class="col-sm-2">
@@ -174,19 +159,6 @@
 </div>
 <div class="footer_bottom">
     <div class="container">
-        <div class="cssmenu">
-            <ul>
-                <li class="active"><a href="login.html">Privacy & Cookies</a></li>
-                |
-                <li><a href="checkout.html">Terms & Conditions</a></li>
-                |
-                <li><a href="checkout.html">Accessibility</a></li>
-                |
-                <li><a href="login.html">Store Directory</a></li>
-                |
-                <li><a href="register.html">About Us</a></li>
-            </ul>
-        </div>
         <div class="copy">
             <p>&copy; 2015 JMImart by <a href="#" target="_blank">Zishan Ahmad</a></p>
         </div>

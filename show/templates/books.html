@@ -23,6 +23,10 @@
                 {% endfor %}
                 <div class="clearfix"></div>
             </ul>
+            <div class="text-center">
+                {% if next > 2 %}<a href="{% url 'show:books' prev %}" class="btn btn-default">Prev</a>{% endif %}
+                <a href="{% url 'show:books' next %}" class="btn btn-default">Next</a>
+            </div>
         </div>
-    </div>
+    </div><br/>
 {% endblock %}

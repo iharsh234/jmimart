@@ -91,9 +91,9 @@
                     <a class="toggleMenu" href="#">Menu</a>
                     <ul class="nav">
                         <li class="active"><a href="{% url 'show:index' %}">HOME</a></li>
-                        <li><a href="{% url 'show:books' %}">BOOKS</a></li>
-                        <li><a href="{% url 'show:stationary' %}">STATIONARY</a></li>
-                        <li><a href="{% url 'show:others' %}">OTHERS</a></li>
+                        <li><a href="{% url 'show:books' 1 %}">BOOKS</a></li>
+                        <li><a href="{% url 'show:stationary' 1 %}">STATIONARY</a></li>
+                        <li><a href="{% url 'show:others' 1 %}">OTHERS</a></li>
                     </ul>
                     <script type="text/javascript" src="{% static 'js/nav.js' %}"></script>
                 </div>

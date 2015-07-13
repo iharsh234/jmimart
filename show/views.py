@@ -24,14 +24,23 @@ def item(request, id):
     }
     return render(request, 'item.html', context_dict)
 
-def books(request):
-    many_books = Item.objects.filter(item_type='book').order_by('-timestamp')
-    return render(request, 'books.html', {'books': many_books})
+def books(request, p):
+    if not p:
+        p = 1
+    p = int(p)
+    many_books = Item.objects.filter(item_type='book').order_by('-timestamp')[12*(p-1):12*p]
+    return render(request, 'books.html', {'books': many_books, 'next': p+1, 'prev': p-1})
 
-def stationary(request):
-    many_stationary = Item.objects.filter(item_type='stationary').order_by('-timestamp')
-    return render(request, 'stationary.html', {'stationary': many_stationary})
+def stationary(request, p):
+    if not p:
+        p = 1
+    p = int(p)
+    many_stationary = Item.objects.filter(item_type='stationary').order_by('-timestamp')[12*(p-1):12*p]
+    return render(request, 'stationary.html', {'stationary': many_stationary, 'next': p+1, 'prev': p-1})
 
-def others(request):
-    many_others = Item.objects.filter(item_type='others').order_by('-timestamp')
-    return render(request, 'others.html', {'others': many_others})
+def others(request, p):
+    if not p:
+        p = 1
+    p = int(p)
+    many_others = Item.objects.filter(item_type='others').order_by('-timestamp')[12*(p-1):12*p]
+    return render(request, 'others.html', {'others': many_others, 'next': p+1, 'prev': p-1})

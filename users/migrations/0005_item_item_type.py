@@ -7,13 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0006_auto_20150712_1524'),
+        ('users', '0004_item'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='item',
-            name='thumbnail',
-            field=models.ImageField(null=True, upload_to=b'static/images', blank=True),
+            name='item_type',
+            field=models.CharField(default='book', max_length=15),
+            preserve_default=False,
         ),
     ]

@@ -19,11 +19,11 @@ def index(request):
         'student': student,
         'items': items,
     }
-    return render(request, 'user/index.html', context_dict)
+    return render(request, 'users/index.html', context_dict)
 
 def user_login(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/user')
+        return HttpResponseRedirect('/users')
     if request.method == 'POST':
         email = escape(request.POST.get('email').strip())
         user = User.objects.filter(email=email)
@@ -35,23 +35,23 @@ def user_login(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponseRedirect('/user')
+                    return HttpResponseRedirect('/users')
                 else:
                     return HttpResponse('Your account is disabled')
             else:
                 login_form = StudentForm(request.POST)
                 login_form.add_error('email', 'Invalid login details')
-                return render(request, 'user/login.html', {'login_form': login_form})
+                return render(request, 'users/login.html', {'login_form': login_form})
         else:
             login_form = StudentForm(request.POST)
             login_form.add_error('email', 'Email ID does not exist. Please register')
-            return render(request, 'user/login.html', {'login_form': login_form})
+            return render(request, 'users/login.html', {'login_form': login_form})
     else:
-        return render(request, 'user/login.html', {})
+        return render(request, 'users/login.html', {})
 
 def register(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/user')
+        return HttpResponseRedirect('/users')
     if request.method == 'POST':
         student_form = StudentForm(request.POST)
         user_form = UserForm(request.POST)
@@ -70,7 +70,7 @@ def register(request):
                 student.save()
                 user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
                 login(request, user)
-                return HttpResponseRedirect('/user')
+                return HttpResponseRedirect('/users')
             else:
                 print(student_form.errors)
                 print(user_form.errors)
@@ -83,7 +83,7 @@ def register(request):
         'student_form': student_form,
     }
 
-    return render(request, 'user/register.html', context_dict)
+    return render(request, 'users/register.html', context_dict)
 
 @login_required
 def profile(request):
@@ -106,7 +106,7 @@ def profile(request):
         Student.objects.filter(user=user).update(mobile=mobile, newsletter=newsletter)
         return HttpResponseRedirect(reverse('user:profile'))
     else:
-        return render(request, 'user/profile.html', context_dict)
+        return render(request, 'users/profile.html', context_dict)
 
 @login_required
 def new(request):
@@ -128,12 +128,12 @@ def new(request):
         student.item_count += 1
         student.save()
         return HttpResponseRedirect(reverse('user:index'))
-    return render(request, 'user/new.html', {})
+    return render(request, 'users/new.html', {})
 
 def sold(request, id):
     student = Student.objects.get(user=request.user)
     Item.objects.filter(student=student, id=id).update(sold=True)
-    return HttpResponseRedirect('/user/item/'+id)
+    return HttpResponseRedirect('/users/item/'+id)
 
 @login_required
 def edit(request, id):
@@ -143,7 +143,7 @@ def edit(request, id):
         'student': student,
         'item': item,
     }
-    return render(request, 'user/edit.html', context_dict)
+    return render(request, 'users/edit.html', context_dict)
 
 @login_required
 def save(request):
@@ -162,7 +162,7 @@ def save(request):
                                                            publisher=publisher,
                                                            price=price,
                                                            description=description)
-        return HttpResponseRedirect('/user/item/'+id)
+        return HttpResponseRedirect('/users/item/'+id)
 
 @login_required
 def view(request):
@@ -171,7 +171,7 @@ def view(request):
     context_dict = {
         'items': items,
     }
-    return render(request, 'user/view.html', context_dict)
+    return render(request, 'users/view.html', context_dict)
 
 @login_required
 def item(request, id):
@@ -182,7 +182,7 @@ def item(request, id):
         'item': single_item,
         'student': student,
     }
-    return render(request, 'user/item.html', context_dict)
+    return render(request, 'users/item.html', context_dict)
 
 @login_required
 def delete_item(request, id):

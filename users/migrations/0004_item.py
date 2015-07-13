@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0003_auto_20150711_2255'),
+        ('users', '0003_auto_20150711_2255'),
     ]
 
     operations = [
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(default=0, max_digits=5, decimal_places=2)),
                 ('image', models.ImageField(default=b'no-image.png', upload_to=b'static/images')),
                 ('description', models.TextField(null=True)),
-                ('student', models.ForeignKey(to='user.Student')),
+                ('student', models.ForeignKey(to='users.Student')),
             ],
         ),
     ]

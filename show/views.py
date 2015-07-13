@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from user.models import Item, Student
+from users.models import Item, Student
 
 # Create your views here.
 

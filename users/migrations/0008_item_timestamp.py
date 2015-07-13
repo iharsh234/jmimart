@@ -2,18 +2,19 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0009_auto_20150712_1654'),
+        ('users', '0007_item_thumbnail'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='item',
-            name='sold',
-            field=models.BooleanField(default=False),
+            name='timestamp',
+            field=models.DateTimeField(default=datetime.datetime.now),
         ),
     ]

@@ -1,5 +1,5 @@
-{% extends 'user/base.html' %}
-{% block title %}View Items | JMImart{% endblock %}
+{% extends 'users/base.html' %}
+{% block title %}{{ user.first_name }} {{ user.last_name }} | JMImart{% endblock %}
 
 {% block login %}
     <a class="login" href="{% url 'user:logout' %}">
@@ -11,7 +11,11 @@
 
 {% block main_content %}
     <div class="container">
+        <h2>Welcome {{ user.first_name }}</h2>
+
+        <p>Total items uploaded: {{ student.item_count }}</p>
         <div class="text-center space-above">
+            <h4>Recently Uploaded Items</h4>
             {% if not items %}
                 <p>No items to display</p>
             {% else %}
@@ -30,11 +34,13 @@
                                         </a>
                                     </div>
                                 </div>
+                                {% if item.sold %}<div class="sold-box1"></div>{% endif %}
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
             {% endif %}
+
         </div>
     <br/>
     </div>

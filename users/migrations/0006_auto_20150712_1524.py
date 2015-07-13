@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0005_item_item_type'),
+        ('users', '0005_item_item_type'),
     ]
 
     operations = [

@@ -7,14 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0004_item'),
+        ('users', '0009_auto_20150712_1654'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='item',
-            name='item_type',
-            field=models.CharField(default='book', max_length=15),
-            preserve_default=False,
+            name='sold',
+            field=models.BooleanField(default=False),
         ),
     ]

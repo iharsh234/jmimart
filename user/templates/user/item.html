@@ -42,7 +42,10 @@
                     <p>{{ item.description }}</p>
                     <br/>
                     <a href="{% url 'user:edit' item.id %}" class="btn1 btn2 btn-primary1"><span>Edit</span></a>&nbsp;&nbsp;
-                    <a href="{% url 'user:delete' item.id %}" class="btn1 btn2 btn-primary1"><span>Delete</span></a>
+                    <a href="{% url 'user:delete' item.id %}" class="btn1 btn2 btn-primary1"><span>Delete</span></a>&nbsp;&nbsp;
+                    {% if not item.sold %}
+                        <a href="{% url 'user:sold' item.id %}" class="btn1 btn2 btn-primary1"><span>Mark Sold</span></a>
+                    {% endif %}
                 </div>
                 <div class="clearfix"></div>
             </div>

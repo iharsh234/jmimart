@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block main_content %}
-    <!-- <div class="slider">
+    <div class="slider">
 	  <div class="callbacks_container">
 	      <ul class="rslides" id="slider">
-	        <li><img src="images/banner.jpg" class="img-responsive" alt=""/></li>
-	        <li><img src="images/banner1.jpg" class="img-responsive" alt=""/></li>
-	        <li><img src="images/banner4.jpg" class="img-responsive" alt=""/></li>
+	        <li><img src="{% static 'images/banner.jpg' %}" class="img-responsive" alt=""/></li>
+	        <li><img src="{% static 'images/banner1.jpg' %}" class="img-responsive" alt=""/></li>
+	        <li><img src="{% static 'images/banner4.jpg' %}" class="img-responsive" alt=""/></li>
 	      </ul>
 	  </div>
-    </div> -->
+    </div>
     <div class="content_bottom">
         <div class="container">
-            <h4 class="text-center">Latest Books</h4>
+            <br/>
+            <h3 class="text-center">Latest Books</h3>
             <ul class="grid1">
                 {% for book in books %}
                     <li>
@@ -26,13 +29,13 @@
                                 <a href="{% url 'show:item' book.id %}" class="btn1 btn-primary1"><span>View</span></a>
                             </div>
                         </div>
-    {#                    <div class="sale-box1"></div>#}
+                        {% if book.sold %}<div class="sold-box1"></div>{% endif %}
                     </li>
                 {% endfor %}
                 <div class="clearfix"></div>
             </ul>
             {% if stationary %}
-            <h4 class="text-center">Latest Stationary Items</h4>
+            <h3 class="text-center">Latest Stationary Items</h3>
             <ul class="grid1">
                 {% for st in stationary %}
                     <li>
@@ -46,14 +49,14 @@
                                 <a href="{% url 'show:item' st.id %}" class="btn1 btn-primary1"><span>View</span></a>
                             </div>
                         </div>
-    {#                    <div class="sale-box1"></div>#}
+                        {% if st.sold %}<div class="sold-box1"></div>{% endif %}
                     </li>
                 {% endfor %}
                 <div class="clearfix"></div>
             </ul>
             {% endif %}
             {% if others %}
-            <h4 class="text-center">Latest Other Items</h4>
+            <h3 class="text-center">Latest Other Items</h3>
             <ul class="grid1">
                 {% for other in others %}
                     <li>
@@ -67,7 +70,7 @@
                                 <a href="{% url 'show:item' other.id %}" class="btn1 btn-primary1"><span>View</span></a>
                             </div>
                         </div>
-    {#                    <div class="sale-box1"></div>#}
+                        {% if other.sold %}<div class="sold-box1"></div>{% endif %}
                     </li>
                 {% endfor %}
                 <div class="clearfix"></div>

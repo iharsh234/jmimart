@@ -26,6 +26,7 @@ class Item(models.Model):
     thumbnail = models.ImageField(upload_to='static/images', blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     timestamp = models.DateTimeField(default=datetime.now)
+    sold = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
         return self.title

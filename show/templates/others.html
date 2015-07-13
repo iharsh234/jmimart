@@ -16,7 +16,7 @@
                                 <a href="{% url 'show:item' other.id %}" class="btn1 btn-primary1"><span>View</span></a>
                             </div>
                         </div>
-    {#                    <div class="sale-box1"></div>#}
+                        {% if other.sold %}<div class="sold-box1"></div>{% endif %}
                     </li>
                 {% empty %}
                     <p class="text-center">No items to show</p><br/><br/>

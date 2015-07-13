@@ -123,12 +123,17 @@ def new(request):
         description = escape(request.POST.get('description').strip())
         image.name = '{}{}'.format(uuid4().hex, image.name[image.name.rfind('.'):])
         item = Item(title=title, author=author, publisher=publisher, price=price, description=description,
-                    image=image, item_type=item_type, student=student)
+                    image=image, item_type=item_type, student=student, sold=False)
         item.save()
         student.item_count += 1
         student.save()
         return HttpResponseRedirect(reverse('user:index'))
     return render(request, 'user/new.html', {})
+
+def sold(request, id):
+    student = Student.objects.get(user=request.user)
+    Item.objects.filter(student=student, id=id).update(sold=True)
+    return HttpResponseRedirect('/user/item/'+id)
 
 @login_required
 def edit(request, id):

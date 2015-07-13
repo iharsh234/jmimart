@@ -44,3 +44,9 @@ def others(request, p):
     p = int(p)
     many_others = Item.objects.filter(item_type='others').order_by('-timestamp')[12*(p-1):12*p]
     return render(request, 'others.html', {'others': many_others, 'next': p+1, 'prev': p-1})
+
+def contact(request):
+    return render(request, 'contact.html', {})
+
+def tnc(request):
+    return render(request, 'tnc.html', {})

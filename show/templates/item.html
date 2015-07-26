@@ -9,6 +9,7 @@
                     <ul id="etalage">
                         <li>
                             <img class="etalage_thumb_image" src="/media/{{ item.image }}" class="img-responsive"/>
+
 {#                                <img class="etalage_source_image" src="/{{ item.image }}" class="img-responsive" title=""/>#}
                         </li>
                     </ul>
@@ -18,9 +19,9 @@
                     <ul class="back">
                         <li><i class="back_arrow"> </i>Back to <a href="{% url 'show:index' %}">Home</a></li>
                     </ul>
-                    <h1>{{ item.title }}</h1>
+                    <h1>{{ item.title }} {% if item.sold %} (SOLD){% endif %}</h1>
                     <ul class="price_single">
-                        <li class="head"><h2>₹ {{ item.price }}</h2></li>
+                        <li class="head"><h2 {% if item.sold %} class="sold" {% endif %}>₹ {{ item.price }}</h2></li>
 {#                        <li class="head_desc"><a href="#">12 reviews</a><img src="images/review.png" alt=""/></li>#}
                         <div class="clearfix"></div>
                     </ul>
@@ -35,13 +36,14 @@
                     <br/><br/>
                     <p>{{ item.description }}</p>
 
+                    {% if not item.sold %}
                     <div class="dropdown_top">
                         <h2>Contact Details</h2>
                         <h4>Name: {{ student.user.first_name }} {{ student.user.last_name }}</h4>
                         <h4>Mobile: {{ student.mobile }}</h4>
                         <div class="clearfix"></div>
                     </div>
-
+                    {% endif %}
                 </div>
                 <div class="clearfix"></div>
             </div>

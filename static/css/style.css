@@ -3042,3 +3042,7 @@ ul.grid1 li {
 	height: 50px;
 	width: 50px;
 }
+
+.sold {
+	text-decoration: line-through;
+}

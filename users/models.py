@@ -85,3 +85,13 @@ class Item(models.Model):
     def save(self):
         self.create_thumbnail()
         super(Item, self).save()
+
+
+class Views(models.Model):
+    item = models.ForeignKey(Item)
+    student = models.ForeignKey(Student)
+    count = models.IntegerField()
+    datetime = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return self.count

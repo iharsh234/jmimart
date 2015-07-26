@@ -125,3 +125,10 @@ LOGIN_URL = '/'
 #
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
+
+# Gmail settings
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "jmimart.zishan@gmail.com"
+EMAIL_HOST_PASSWORD = 'JmiMart@Zishan'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

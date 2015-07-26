@@ -27,6 +27,7 @@ class Item(models.Model):
     description = models.TextField(null=True, blank=True)
     timestamp = models.DateTimeField(default=datetime.now)
     sold = models.BooleanField(default=False, blank=True)
+    condition = models.CharField(max_length=10),
 
     def __str__(self):
         return self.title

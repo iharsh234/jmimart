@@ -49,6 +49,10 @@
                             <span>Description</span>
                             <textarea name="description" id="is_description" cols="30" rows="10">{{ item.description }}</textarea>
                         </div>
+                        <div>
+                            <span>Condition</span>
+                            <input type="text" name="condition" id="id_condition" value="{{ item.condition }}">
+                        </div>
                         <input type="hidden" name="id" value="{{ item.id }}" />
                         <div class="clearfix"></div>
                         <a class="news-letter" href="#" style="visibility: hidden;">

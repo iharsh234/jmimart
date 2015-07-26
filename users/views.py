@@ -121,9 +121,10 @@ def new(request):
         publisher = escape(request.POST.get('publisher').strip())
         price = escape(request.POST.get('price').strip())
         description = escape(request.POST.get('description').strip())
+        condition = escape(request.POST.get('condition').strip())
         image.name = '{}{}'.format(uuid4().hex, image.name[image.name.rfind('.'):])
         item = Item(title=title, author=author, publisher=publisher, price=price, description=description,
-                    image=image, item_type=item_type, student=student, sold=False)
+                    image=image, item_type=item_type, student=student, sold=False, condition=condition)
         item.save()
         student.item_count += 1
         student.save()
@@ -155,13 +156,15 @@ def save(request):
         publisher = escape(request.POST.get('publisher').strip())
         price = escape(request.POST.get('price').strip())
         description = escape(request.POST.get('description').strip())
+        condition = escape(request.POST.get('condition').strip())
         id = request.POST.get('id')
         Item.objects.filter(student=student, id=id).update(item_type=item_type,
                                                            title=title,
                                                            author=author,
                                                            publisher=publisher,
                                                            price=price,
-                                                           description=description)
+                                                           description=description,
+                                                           condition=condition)
         return HttpResponseRedirect('/users/item/'+id)
 
 @login_required

@@ -39,6 +39,8 @@
                     {% if item.publisher %}
                         <h4>Publisher: {{ item.publisher }}</h4>
                     {% endif %}
+                    <h7>Condition: {{ item.condition }}</h7>
+                    <br/><br/>
                     <p>{{ item.description }}</p>
                     <br/>
                     <a href="{% url 'user:edit' item.id %}" class="btn1 btn2 btn-primary1"><span>Edit</span></a>&nbsp;&nbsp;

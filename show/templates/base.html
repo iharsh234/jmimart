@@ -45,6 +45,10 @@
                 fit: true   // 100% fit in a container
             });
         });
+
+        function destroy(id) {
+            document.getElementById(id).remove()
+        }
     </script>
 </head>
 <body>
@@ -125,13 +129,13 @@
         <div class="col-sm-2 grid-3">
             <h3>Information</h3>
             <ul class="footer_list">
-                <li><a href="#">How to post items</a></li>
+                <li><a href="{% url 'show:howto' %}">How to post items</a></li>
             </ul>
         </div>
         <div class="col-sm-2 grid-3">
             <h3>Campaigns</h3>
             <ul class="footer_list">
-                <li><a href="#">Student Ambassador</a></li>
+                <li><a href="{% url 'show:ambassador' %}">Student Ambassador</a></li>
             </ul>
         </div>
         <div class="col-sm-2 grid-3">

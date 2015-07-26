@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from users.models import Item, Student
+from users.models import Item, Student, Views
+from datetime import datetime
+from django.utils.html import escape
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -18,6 +21,14 @@ def index(request):
 def item(request, id):
     single_item = Item.objects.get(id=id)
     student = Student.objects.get(id=single_item.student_id)
+    item_views = Views.objects.filter(item=single_item, student=student)
+    if item_views:
+        count = item_views.get().count
+        item_views.update(count=count+1,
+                          datetime=datetime.now())
+    else:
+        item_view = Views(item=single_item, student=student, count=1)
+        item_view.save()
     context_dict = {
         'item': single_item,
         'student': student,
@@ -45,8 +56,22 @@ def others(request, p):
     many_others = Item.objects.filter(item_type='others').order_by('-timestamp')[12*(p-1):12*p]
     return render(request, 'others.html', {'others': many_others, 'next': p+1, 'prev': p-1})
 
-def contact(request):
-    return render(request, 'contact.html', {})
-
 def tnc(request):
     return render(request, 'tnc.html', {})
+
+def contact(request):
+    context_dict = {}
+    if request.method == 'POST':
+        name = escape(request.POST.get('name').strip())
+        email = escape(request.POST.get('email').strip())
+        message = escape(request.POST.get('message').strip())
+        send_mail("JMIMART - Contact: " + name, message, email, ['zishanrbp@gmail.com'], fail_silently=False)
+        context_dict['sent'] = True
+
+    return render(request, 'contact.html', context_dict)
+
+def howto(request):
+    return render(request, 'howto.html', {})
+
+def ambassador(request):
+    return render(request, 'ambassador.html', {})

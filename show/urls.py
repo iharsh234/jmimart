@@ -9,4 +9,7 @@ urlpatterns = patterns('',
     url(r'^others/(?P<p>[0-9]*)', views.others, name='others'),
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^tnc/$', views.tnc, name='tnc'),
+    url(r'^contact/$', views.contact, name='contact'),
+    url(r'^howto/$', views.howto, name='howto'),
+    url(r'^ambassador/$', views.ambassador, name='ambassador'),
 )

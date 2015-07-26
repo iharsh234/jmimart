@@ -5,7 +5,13 @@
 {% block main_content %}
     <div class="contact">
         <div class="container">
-            <div class="contact_top">
+            {% if sent %}
+            <div data-alert class="bg-success spaced text-success" id="message">
+                Thank you for contacting me! I will get back to you soon.
+                <a href="#" class="close" onclick="destroy('message')">&times;</a>
+            </div>
+            {% endif %}
+            <div class="contact_top space-above">
                 <div class="col-md-3 contact_left">
                     <div class="contact_grid contact_address">
                         <h3>Contact</h3>
@@ -16,13 +22,14 @@
                 </div>
                 <div class="col-md-9">
                     <div class="contact-form">
-                        <form method="post" action="contact-post.html">
+                        <form method="post" action="{% url 'show:contact' %}">
+                            {% csrf_token %}
                             <input type="text" class="textbox" value="Name" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Name';}">
+                                   onblur="if (this.value == '') {this.value = 'Name';}" name="name" required>
                             <input type="text" class="textbox" value="Email" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Email';}">
+                                   onblur="if (this.value == '') {this.value = 'Email';}" name="email" required>
                             <textarea value="Message:" onfocus="this.value = '';"
-                                      onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
+                                      onblur="if (this.value == '') {this.value = 'Message';}" name="message" required>Message</textarea>
                             <input type="submit" value="Submit">
                         </form>
                     </div>

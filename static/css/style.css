@@ -963,7 +963,7 @@ ul.tab_img li.last{
 	margin-right:0;
 }
 .tab_desc{
-	background:#f7f7f7;
+	/*background:#f7f7f7;*/
 	padding:1em 0;
 	list-style:none;
 	text-align:center;
@@ -1168,7 +1168,7 @@ ul.grid1 {
 }
 ul.grid1 li {
 	float: left;
-	width: 23%;
+	width: 22%;
 	margin-right: 2.6%;
 }
 ul.grid1 li.grid1_last {
@@ -1533,7 +1533,7 @@ ul.grid-4{
 }
 ul.grid-4 li {
 	float: left;
-	width: 22%;
+	width: 21%;
 	margin-right: 4%;
 	margin-top: 2%;
 	margin-bottom: 4%;
@@ -1543,7 +1543,7 @@ ul.grid-4 li.grid-4_last {
 	margin-right: 0;
 }
 .tab_desc1{
-	background:#f9f5f4;
+	/*background:#f9f5f4;*/
 	padding: 1em 0;
 	list-style: none;
 	text-align: center;
@@ -1791,7 +1791,8 @@ ul.grid_1 li.grid_1-desc p{
 	float:left;
 }
 .span_3_of_2 {
-	width: 70.3333%;
+    margin-left: 4%;
+	width: 66.3333%;
 }
 .single_top {
 	margin:3em 0;
@@ -2513,7 +2514,8 @@ span.left_line1, span.right_line1{
 	margin-top: 2em;
 }
 .span_3_of_2 {
-	width: 63.3333%;
+    margin-left: 4%;
+	width: 59.3333%;
 }
 .images_3_of_2 {
 	width: 33.2%;
@@ -2587,7 +2589,7 @@ span.left_line1, span.right_line1 {
 	width: 42.2%;
 }
 .span_3_of_2 {
-	width: 54.3333%;
+	/*width: 54.3333%;*/
 }
 ul.single_social li {
 	margin-right: 3%;
@@ -3029,6 +3031,7 @@ select, textarea, input[type="file"] {
 
 ul.grid1 li {
     background-color: #fffee8;
+    position: relative;
 }
 
 .tnc {
@@ -3045,4 +3048,8 @@ ul.grid1 li {
 
 .sold {
 	text-decoration: line-through;
+}
+
+ul.grid-4 li {
+    position: relative;
 }

@@ -5,26 +5,28 @@
 {% block main_content %}
     <div class="content_bottom">
         <div class="container">
-            <ul class="grid1">
-                {% for book in books %}
-                    <li>
-                        <div class="view view-first spaced">
-                            <img src="/media/{{ book.thumbnail }}" class="img-responsive centered" alt=""/>
+            <div  class="product_box1">
+                <ul class="grid-4">
+                    {% for book in books %}
+                        <li>
+                            <div class="view view-first spaced">
+                                <img src="/media/{{ book.thumbnail }}" class="img-responsive centered" alt=""/>
 
-                            <div class="tab_desc">
-                                <h3>{{ book.title }}</h3>
+                                <div class="tab_desc">
+                                    <h3>{{ book.title }}</h3>
 
-                                <p>₹ {{ book.price }}</p>
-                                <a href="{% url 'show:item' book.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                    <p>₹ {{ book.price }}</p>
+                                    <a href="{% url 'show:item' book.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                </div>
                             </div>
-                        </div>
-                        {% if book.sold %}<div class="sold-box1"></div>{% endif %}
-                    </li>
-                {% empty %}
-                    <p class="text-center">No items to show</p><br/><br/>
-                {% endfor %}
-                <div class="clearfix"></div>
-            </ul>
+                            {% if book.sold %}<div class="sold-box1"></div>{% endif %}
+                        </li>
+                    {% empty %}
+                        <p class="text-center">No items to show</p><br/><br/>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </ul>
+            </div>
             <div class="text-center">
                 {% if next > 2 %}<a href="{% url 'show:books' prev %}" class="btn btn-default">Prev</a>{% endif %}
                 <a href="{% url 'show:books' next %}" class="btn btn-default">Next</a>

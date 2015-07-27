@@ -18,24 +18,26 @@
         <div class="container">
             <br/>
             <h3 class="text-center">Latest Books</h3>
-            <ul class="grid1">
-                {% for book in books %}
-                    <li>
-                        <div class="view view-first spaced">
-                            <img src="/media/{{ book.thumbnail }}" class="img-responsive centered" alt=""/>
+            <div class="product_box1">
+                <ul class="grid-4">
+                    {% for book in books %}
+                        <li>
+                            <div class="view view-first spaced">
+                                <img src="/media/{{ book.thumbnail }}" class="img-responsive centered" alt=""/>
 
-                            <div class="tab_desc">
-                                <h3>{{ book.title }}</h3>
+                                <div class="tab_desc">
+                                    <h3>{{ book.title }}</h3>
 
-                                <p>₹ {{ book.price }}</p>
-                                <a href="{% url 'show:item' book.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                    <p>₹ {{ book.price }}</p>
+                                    <a href="{% url 'show:item' book.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                </div>
                             </div>
-                        </div>
-                        {% if book.sold %}<div class="sold-box1"></div>{% endif %}
-                    </li>
-                {% endfor %}
-                <div class="clearfix"></div>
-            </ul>
+                            {% if book.sold %}<div class="sold-box1"></div>{% endif %}
+                        </li>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </ul>
+            </div>
             {% if stationary %}
             <h3 class="text-center">Latest Stationary Items</h3>
             <ul class="grid1">

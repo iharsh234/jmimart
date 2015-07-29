@@ -3052,6 +3052,7 @@ ul.grid1 li {
 
 ul.grid-4 li {
     position: relative;
+    max-height: 350px;
 }
 
 .right {

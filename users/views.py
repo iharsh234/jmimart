@@ -113,9 +113,9 @@ def change_password(request):
     context_dict = {}
     if request.method == 'POST':
         user = request.user
-        current = request.POST.get('current_password')
-        password = request.POST.get('password')
-        retype = request.POST.get('retype_password')
+        current = escape(request.POST.get('current_password'))
+        password = escape(request.POST.get('password'))
+        retype = escape(request.POST.get('retype_password'))
         auth = authenticate(username=user.username, password=current)
         if auth is None:
             context_dict['wrong_password'] = True

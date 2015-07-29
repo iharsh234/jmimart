@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     url(r'^sold/(?P<id>[0-9]+)', views.sold, name='sold'),
     url(r'^save/$', views.save, name='save'),
     url(r'^view/$', views.view, name='view'),
-    url(r'^change_password/$', views.change_password, name='change_password')
+    url(r'^change_password/$', views.change_password, name='change_password'),
+    url(r'^forgot_password', views.forgot_password, name='forgot_password'),
 )

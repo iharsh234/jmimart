@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
+from random import randint
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -123,9 +125,35 @@ def change_password(request):
             context_dict['not_same'] = True
         else:
             user.set_password(password)
+            user.save()
             context_dict['password_changed'] = True
 
     return render(request, 'users/change_password.html', context_dict)
+
+def forgot_password(request):
+    context_dict = {}
+    if request.method == 'POST':
+        email = escape(request.POST.get('email').strip())
+        user = User.objects.filter(email=email)
+        if user:
+            user = user.get()
+            username = user.username
+            box = ['Q', '$', 'B', '#', 'W', '@', 'L', 'A']
+            rpass = box[randint(0, 7)] + box[randint(0, 7)] + box[randint(0, 7)] + box[randint(0, 7)] + box[randint(0, 7)]
+            print username
+            print rpass
+            print type(rpass)
+            user.set_password(rpass)
+            user.save()
+            message = 'Dear ' + username + '\nYour new password is: ' + rpass
+            message += '\nKindly change the password once you log in through the password provided above.'
+            message += '\n\n Regards!\nJMImart'
+            send_mail("JMIMART - Password Reset", message, 'jmimart.zishan@gmail.com', [email], fail_silently=False)
+            context_dict['sent_mail'] = True
+        else:
+            context_dict['invalid_user'] = True
+
+    return render(request, 'users/forgot_password.html', context_dict)
 
 @login_required
 def new(request):

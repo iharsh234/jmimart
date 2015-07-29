@@ -115,6 +115,7 @@ def change_password(request):
     context_dict = {}
     if request.method == 'POST':
         user = request.user
+        username = user.username
         current = escape(request.POST.get('current_password'))
         password = escape(request.POST.get('password'))
         retype = escape(request.POST.get('retype_password'))
@@ -126,6 +127,9 @@ def change_password(request):
         else:
             user.set_password(password)
             user.save()
+            logout(request);
+            user = authenticate(username=username, password=password)
+            login(request, user)
             context_dict['password_changed'] = True
 
     return render(request, 'users/change_password.html', context_dict)

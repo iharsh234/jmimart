@@ -3053,3 +3053,43 @@ ul.grid1 li {
 ul.grid-4 li {
     position: relative;
 }
+
+.right {
+	float: right;
+}
+
+.pwd-button {
+	background:#fd926d;
+	color: #FFF;
+	font-size: 0.8em;
+    margin-top: 0.5rem;
+	padding: 0.8em 2em;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	display: inline-block;
+	text-transform: uppercase;
+	border:none;
+	outline:none;
+}
+.pwd-button:hover {
+	background:#000;
+	text-decoration: none;
+}
+
+.pwd-button a:link {
+	text-decoration: none;
+}
+
+.pwd-button a:visited {
+	text-decoration: none;
+}
+
+.pwd-button a:active {
+	text-decoration: none;
+}
+
+.pwd-change div {
+	float: none;
+}

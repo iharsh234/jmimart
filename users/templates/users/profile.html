@@ -14,12 +14,12 @@
             {% if profile_updated %}
                 <p class="bg-success text-center spaced">Profile Updated!</p>
             {% endif %}
+            <a href="{% url 'user:change_password' %}" class="right pwd-button">CHANGE PASSWORD</a><br>
             <div class="register">
                 <form id="student_form" method="post" action="{% url 'user:profile' %}">
                     {% csrf_token %}
                     <div class="register-top-grid">
                         <h3>PERSONAL INFORMATION</h3>
-
                         <div>
                             <span>First Name</span>
                             <input type="text" name="first_name" id="id_first_name" value="{{ user.first_name }}">

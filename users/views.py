@@ -109,6 +109,25 @@ def profile(request):
         return render(request, 'users/profile.html', context_dict)
 
 @login_required
+def change_password(request):
+    context_dict = {}
+    if request.method == 'POST':
+        user = request.user
+        current = request.POST.get('current_password')
+        password = request.POST.get('password')
+        retype = request.POST.get('retype_password')
+        auth = authenticate(username=user.username, password=current)
+        if auth is None:
+            context_dict['wrong_password'] = True
+        elif password != retype:
+            context_dict['not_same'] = True
+        else:
+            user.set_password(password)
+            context_dict['password_changed'] = True
+
+    return render(request, 'users/change_password.html', context_dict)
+
+@login_required
 def new(request):
     from uuid import uuid4
 

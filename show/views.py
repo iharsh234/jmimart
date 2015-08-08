@@ -65,6 +65,7 @@ def contact(request):
         name = escape(request.POST.get('name').strip())
         email = escape(request.POST.get('email').strip())
         message = escape(request.POST.get('message').strip())
+        message += '\nEmail: ' + email
         send_mail("JMIMART - Contact: " + name, message, email, ['zishanrbp@gmail.com'], fail_silently=False)
         context_dict['sent'] = True
 

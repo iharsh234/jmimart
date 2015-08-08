@@ -41,47 +41,51 @@
             </div>
             {% if stationary %}
             <h3 class="text-center">Latest Stationary Items</h3>
-            <ul class="grid1">
-                {% for st in stationary %}
-                    <li>
-                        <div class="view view-first spaced">
-                            <img src="/media/{{ st.thumbnail }}" class="img-responsive centered" alt=""/>
+            <div class="product_box1">
+                <ul class="grid-4">
+                    {% for st in stationary %}
+                        <li>
+                            <div class="view view-first spaced">
+                                <img src="/media/{{ st.thumbnail }}" class="img-responsive centered" alt=""/>
 
-                            <div class="tab_desc">
-                                <h3>{{ st.title }}</h3>
+                                <div class="tab_desc">
+                                    <h3>{{ st.title }}</h3>
 
-                                <p>₹ {{ st.price }}</p>
-                                <a href="{% url 'show:item' st.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                    <p>₹ {{ st.price }}</p>
+                                    <a href="{% url 'show:item' st.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                </div>
                             </div>
-                        </div>
-                        {% if st.sold %}<div class="sold-box1"></div>{% endif %}
-                    </li>
-                {% endfor %}
-                <div class="clearfix"></div>
-            </ul>
+                            {% if st.sold %}<div class="sold-box1"></div>{% endif %}
+                        </li>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </ul>
                 <a href="{% url 'show:stationary' 1 %}"><h4 class="text-center orange">View More Stationary Items</h4></a>
+            </div>
             {% endif %}
             {% if others %}
             <h3 class="text-center">Latest Other Items</h3>
-            <ul class="grid1">
-                {% for other in others %}
-                    <li>
-                        <div class="view view-first spaced">
-                            <img src="/media/{{ other.thumbnail }}" class="img-responsive centered" alt=""/>
+            <div class="product_box1">
+                <ul class="grid-4">
+                    {% for other in others %}
+                        <li>
+                            <div class="view view-first spaced">
+                                <img src="/media/{{ other.thumbnail }}" class="img-responsive centered" alt=""/>
 
-                            <div class="tab_desc">
-                                <h3>{{ other.title }}</h3>
+                                <div class="tab_desc">
+                                    <h3>{{ other.title }}</h3>
 
-                                <p>₹ {{ other.price }}</p>
-                                <a href="{% url 'show:item' other.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                    <p>₹ {{ other.price }}</p>
+                                    <a href="{% url 'show:item' other.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                </div>
                             </div>
-                        </div>
-                        {% if other.sold %}<div class="sold-box1"></div>{% endif %}
-                    </li>
-                {% endfor %}
-                <div class="clearfix"></div>
-            </ul>
+                            {% if other.sold %}<div class="sold-box1"></div>{% endif %}
+                        </li>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </ul>
                 <a href="{% url 'show:others' 1 %}"><h4 class="text-center orange">View More Other Items</h4></a>
+            </div>
         {% endif %}
         </div>
     </div>

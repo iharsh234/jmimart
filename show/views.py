@@ -8,9 +8,9 @@ from django.core.mail import send_mail
 # Create your views here.
 
 def index(request):
-    books = Item.objects.filter(item_type='book').order_by('-timestamp')[:4]
-    stationary = Item.objects.filter(item_type='stationary').order_by('-timestamp')[:4]
-    others = Item.objects.filter(item_type='others').order_by('-timestamp')[:4]
+    books = Item.objects.filter(item_type='book').order_by('-timestamp')[:8]
+    stationary = Item.objects.filter(item_type='stationary').order_by('-timestamp')[:8]
+    others = Item.objects.filter(item_type='others').order_by('-timestamp')[:8]
     context_dict = {
         'books': books,
         'stationary': stationary,

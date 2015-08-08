@@ -68,16 +68,17 @@
                     <div class="clearfix"></div>
                 </ul>
                 <!-- start search-->
-{#                <div class="search-box">#}
-{#                    <div id="sb-search" class="sb-search">#}
-{#                        <form>#}
-{#                            <input class="sb-search-input" placeholder="Enter your search term..." type="search"#}
-{#                                   name="search" id="search">#}
-{#                            <input class="sb-search-submit" type="submit" value="">#}
-{#                            <span class="sb-icon-search"> </span>#}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
+                <div class="search-box">
+                    <div id="sb-search" class="sb-search">
+                        <form method="post" action="{% url 'show:search' %}">
+                            {% csrf_token %}
+                            <input class="sb-search-input" placeholder="Enter your search term..." type="search"
+                                   name="search" id="search">
+                            <input class="sb-search-submit" type="submit" value="">
+                            <span class="sb-icon-search"> </span>
+                        </form>
+                    </div>
+                </div>
                 <!----search-scripts---->
                 <script src="{% static 'js/classie.js' %}"></script>
                 <script src="{% static 'js/uisearch.js' %}"></script>

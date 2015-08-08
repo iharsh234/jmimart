@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block main_content %}
+    <div class="content_bottom">
+        <div class="container">
+            <div  class="product_box1">
+                <ul class="grid-4">
+                    {% for item in items %}
+                        <li>
+                            <div class="view view-first spaced">
+                                <img src="/media/{{ item.thumbnail }}" class="img-responsive centered" alt=""/>
+
+                                <div class="tab_desc">
+                                    <h3>{{ item.title }}</h3>
+
+                                    <p>₹ {{ item.price }}</p>
+                                    <a href="{% url 'show:item' item.id %}" class="btn1 btn-primary1"><span>View</span></a>
+                                </div>
+                            </div>
+                            {% if item.sold %}<div class="sold-box1"></div>{% endif %}
+                        </li>
+                    {% empty %}
+                        <p class="text-center">No items to show</p><br/><br/>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </ul>
+            </div>
+        </div>
+    </div><br/>
+{% endblock %}

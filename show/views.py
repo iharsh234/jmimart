@@ -56,6 +56,13 @@ def others(request, p):
     many_others = Item.objects.filter(item_type='others').order_by('-timestamp')[12*(p-1):12*p]
     return render(request, 'others.html', {'others': many_others, 'next': p+1, 'prev': p-1})
 
+def search(request):
+    if request.method == 'POST':
+        q = escape(request.POST.get('search').strip())
+        items = Item.objects.filter(title__icontains=q)
+        return render(request, 'search.html', {'items': items})
+
+
 def tnc(request):
     return render(request, 'tnc.html', {})
 
